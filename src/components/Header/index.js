@@ -1,6 +1,31 @@
 import './Header.scss'
+import React, { useEffect } from 'react';
+
+function handleScroll() {
+  const scroll = window.scrollY;
+  const header = document.querySelector('header');
+  if (header) {
+    if (scroll >=250) {
+      header.classList.add('background-header');
+    } else {
+      header.classList.remove('background-header');
+    }
+  }
+}
 
 function Header(){
+  useEffect(() => {
+    const handleScrollEvent = () => {
+      handleScroll();
+    };
+
+    window.addEventListener('scroll', handleScrollEvent);
+
+    return () => {
+      window.removeEventListener('scroll', handleScrollEvent);
+    };
+  }, []);
+
   return (
     <header className="">
     <nav className="navbar navbar-expand-lg">
