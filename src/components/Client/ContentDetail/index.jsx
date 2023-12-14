@@ -63,8 +63,9 @@ function ContentDetail() {
                         tempor nisl. Donec egestas, quam eu rutrum ultrices,
                         sapien ante posuere nisl, ac eleifend eros orci vel
                         ante. Pellentesque vitae eleifend velit. Etiam blandit
-                        felis sollicitudin vestibulum feugiat.
-                        {"\n\n"}Donec tincidunt leo nec magna gravida varius.
+                        felis sollicitudin vestibulum feugiat. <br></br>
+                        <h3>I. Muc luc 1</h3>
+                        Donec tincidunt leo nec magna gravida varius.
                         Suspendisse felis orci, egestas ac sodales quis,
                         venenatis et neque. Vivamus facilisis dignissim arcu et
                         blandit. Maecenas finibus dui non pulvinar lacinia. Ut
@@ -72,6 +73,31 @@ function ContentDetail() {
                         metus nec libero ultrices varius eget in risus. Cras id
                         nibh at erat pulvinar malesuada et non ipsum.
                         Suspendisse id ipsum leo.
+                        <img src={blog_post_01} alt="" />
+                        <br></br>
+                        <br></br>
+                        <h3>II. Muc luc 2</h3>
+                        Donec tincidunt leo nec magna gravida varius.
+                        Suspendisse felis orci, egestas ac sodales quis,
+                        venenatis et neque. Vivamus facilisis dignissim arcu et
+                        blandit. Maecenas finibus dui non pulvinar lacinia. Ut
+                        lacinia finibus lorem vel porttitor. Suspendisse et
+                        metus nec libero ultrices varius eget in risus. Cras id
+                        nibh at erat pulvinar malesuada et non ipsum.
+                        Suspendisse id ipsum leo.
+
+                        <br></br>
+                        <br></br>
+                        <h3>III. Muc luc 3</h3>
+                        Donec tincidunt leo nec magna gravida varius.
+                        Suspendisse felis orci, egestas ac sodales quis,
+                        venenatis et neque. Vivamus facilisis dignissim arcu et
+                        blandit. Maecenas finibus dui non pulvinar lacinia. Ut
+                        lacinia finibus lorem vel porttitor. Suspendisse et
+                        metus nec libero ultrices varius eget in risus. Cras id
+                        nibh at erat pulvinar malesuada et non ipsum.
+                        Suspendisse id ipsum leo.
+                        <img src={blog_post_01} alt="" />
                       </p>
                       <div className="post-options">
                         <div className="row">

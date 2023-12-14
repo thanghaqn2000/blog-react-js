@@ -1,9 +1,10 @@
 import "./App.css";
-import Home from "./components/Home";
-import Header from "./components/Header";
-import Content from "./components/Content";
-import Footer from "./components/Footer";
-import ContentDetail from "./components/ContentDetail";
+import Home from "./components/Client/Home";
+import Header from "./components/Client/Header";
+import Content from "./components/Client/Content";
+import Footer from "./components/Client/Footer";
+import ContentDetail from "./components/Client/ContentDetail";
+import Post from "./components/Admin/Post";
 
 import {
   BrowserRouter as Router,
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/content-detail" element={<ContentDetail />} />
+          <Route path="/post" element={<Post />} />
         </Routes>
         <Footer></Footer>
       </div>

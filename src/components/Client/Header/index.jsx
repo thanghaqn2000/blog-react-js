@@ -58,13 +58,11 @@ function Header() {
           >
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
-                <a className="nav-link" href="index.html">
-                  Home
-                </a>
+                <NavLink to="/post" className="nav-link">Post</NavLink>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="about.html">
-                  About Us
+                  About
                 </a>
               </li>
               <li className="nav-item">
