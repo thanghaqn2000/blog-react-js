@@ -1,8 +1,27 @@
 import "./ContentDetail.scss";
 import Sidebar from "../Sidebar";
-import blog_post_01 from "/home/ho.duc.thang/sun_inc/personal_project/MyBlog/blog-react-js/src/assets/images/blog-post-02.jpg";
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
-function ContentDetail() {
+import { loadPost } from '../../../services/admin/post-service';
+
+import blog_post_01 from "../../../assets/images/blog-post-02.jpg";
+
+function ContentDetail({ postDefault = { id: -1, title: "This is default post title", content: "This is default post content" }}) {
+  const [post, setPost] = useState(postDefault);
+
+  useEffect(() => {
+    // load post of postId
+    loadPost(1)
+      .then((data) => {
+        console.log(data.title);
+        setPost(data);
+      })
+      .catch((error) => {
+        toast.error("Error in loading post");
+      });
+  }, []);
+
   return (
     <section className="blog-posts grid-system">
       <div className="container">
@@ -16,88 +35,20 @@ function ContentDetail() {
                       <img src={blog_post_01} alt="" />
                     </div>
                     <div className="down-content">
-                      <span>Lifestyle</span>
+                      <span>{post.category}</span>
                       <a href="post-details.html">
-                        <h4>Aenean pulvinar gravida sem nec</h4>
+                        <h4>{post.title}</h4>
                       </a>
                       <ul className="post-info">
                         <li>
                           <a href="#">Admin</a>
                         </li>
                         <li>
-                          <a href="#">May 12, 2020</a>
-                        </li>
-                        <li>
-                          <a href="#">10 Comments</a>
+                          <a href="#">{post.created_at}</a>
                         </li>
                       </ul>
                       <p>
-                        You can browse different tags such as
-                        <a
-                          rel="nofollow"
-                          href="https://templatemo.com/tag/multi-page"
-                          target="_parent"
-                        >
-                          multi-page
-                        </a>
-                        ,
-                        <a
-                          rel="nofollow"
-                          href="https://templatemo.com/tag/resume"
-                          target="_parent"
-                        >
-                          resume
-                        </a>
-                        ,
-                        <a
-                          rel="nofollow"
-                          href="https://templatemo.com/tag/video"
-                          target="_parent"
-                        >
-                          video
-                        </a>
-                        ,etc. to see more CSS templates. Sed hendrerit rutrum
-                        arcu, non malesuada nisi. Sed id facilisis turpis. Donec
-                        justo elit, dapibus vel ultricies in, molestie sit amet
-                        risus. In nunc augue, rhoncus sed libero et, tincidunt
-                        tempor nisl. Donec egestas, quam eu rutrum ultrices,
-                        sapien ante posuere nisl, ac eleifend eros orci vel
-                        ante. Pellentesque vitae eleifend velit. Etiam blandit
-                        felis sollicitudin vestibulum feugiat. <br></br>
-                        <h3>I. Muc luc 1</h3>
-                        Donec tincidunt leo nec magna gravida varius.
-                        Suspendisse felis orci, egestas ac sodales quis,
-                        venenatis et neque. Vivamus facilisis dignissim arcu et
-                        blandit. Maecenas finibus dui non pulvinar lacinia. Ut
-                        lacinia finibus lorem vel porttitor. Suspendisse et
-                        metus nec libero ultrices varius eget in risus. Cras id
-                        nibh at erat pulvinar malesuada et non ipsum.
-                        Suspendisse id ipsum leo.
-                        <img src={blog_post_01} alt="" />
-                        <br></br>
-                        <br></br>
-                        <h3>II. Muc luc 2</h3>
-                        Donec tincidunt leo nec magna gravida varius.
-                        Suspendisse felis orci, egestas ac sodales quis,
-                        venenatis et neque. Vivamus facilisis dignissim arcu et
-                        blandit. Maecenas finibus dui non pulvinar lacinia. Ut
-                        lacinia finibus lorem vel porttitor. Suspendisse et
-                        metus nec libero ultrices varius eget in risus. Cras id
-                        nibh at erat pulvinar malesuada et non ipsum.
-                        Suspendisse id ipsum leo.
-
-                        <br></br>
-                        <br></br>
-                        <h3>III. Muc luc 3</h3>
-                        Donec tincidunt leo nec magna gravida varius.
-                        Suspendisse felis orci, egestas ac sodales quis,
-                        venenatis et neque. Vivamus facilisis dignissim arcu et
-                        blandit. Maecenas finibus dui non pulvinar lacinia. Ut
-                        lacinia finibus lorem vel porttitor. Suspendisse et
-                        metus nec libero ultrices varius eget in risus. Cras id
-                        nibh at erat pulvinar malesuada et non ipsum.
-                        Suspendisse id ipsum leo.
-                        <img src={blog_post_01} alt="" />
+                        {post.content}
                       </p>
                       <div className="post-options">
                         <div className="row">
@@ -107,23 +58,10 @@ function ContentDetail() {
                                 <i className="fa fa-tags"></i>
                               </li>
                               <li>
-                                <a href="#">Best Templates</a>,
+                                <a href="#">Facebook  </a>,
                               </li>
                               <li>
-                                <a href="#">TemplateMo</a>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="col-6">
-                            <ul className="post-share">
-                              <li>
-                                <i className="fa fa-share-alt"></i>
-                              </li>
-                              <li>
-                                <a href="#">Facebook</a>,
-                              </li>
-                              <li>
-                                <a href="#"> Twitter</a>
+                                <a href="#">Zalo</a>
                               </li>
                             </ul>
                           </div>
