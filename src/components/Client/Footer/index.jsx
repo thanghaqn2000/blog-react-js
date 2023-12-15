@@ -16,7 +16,7 @@ function Content() {
           </div>
           <div className="col-lg-12">
             <div className="copyright-text">
-              <p>Copyright 2020 Stand Blog Co.
+              <p>Copyright 2023 Dtee.com.
                     
                 | Design: <a rel="nofollow" href="https://templatemo.com" target="_parent">TemplateMo</a></p>
             </div>
