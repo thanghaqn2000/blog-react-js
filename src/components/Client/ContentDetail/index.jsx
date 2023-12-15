@@ -1,6 +1,6 @@
 import "./ContentDetail.scss";
 import Sidebar from "../Sidebar";
-import blog_post_01 from "/src/images/blog-post-01.jpg";
+import blog_post_01 from "/home/ho.duc.thang/sun_inc/personal_project/MyBlog/blog-react-js/src/assets/images/blog-post-02.jpg";
 
 function ContentDetail() {
   return (

@@ -2,7 +2,7 @@ import "./Content.scss";
 import Sidebar from "../Sidebar";
 import { Link, NavLink } from "react-router-dom";
 
-import blog_post_01 from "/src/images/blog-post-01.jpg";
+import blog_post_01 from "/home/ho.duc.thang/sun_inc/personal_project/MyBlog/blog-react-js/src/assets/images/blog-post-02.jpg";
 
 function Content() {
   return (

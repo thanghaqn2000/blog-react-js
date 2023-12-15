@@ -1,17 +1,14 @@
 import "./App.css";
 import Home from "./components/Client/Home";
 import Header from "./components/Client/Header";
-import Content from "./components/Client/Content";
 import Footer from "./components/Client/Footer";
 import ContentDetail from "./components/Client/ContentDetail";
-import Post from "./components/Admin/Post";
+import AdminPage from "./components/Admin/AdminPage";
 
 import {
   BrowserRouter as Router,
   Route,
-  Routes,
-  Link,
-  NavLink,
+  Routes
 } from "react-router-dom";
 
 function App() {
@@ -20,9 +17,9 @@ function App() {
       <div className="App">
         <Header></Header>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />}/>
           <Route path="/content-detail" element={<ContentDetail />} />
-          <Route path="/post" element={<Post />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
         <Footer></Footer>
       </div>
