@@ -1,11 +1,16 @@
 import "./Post.scss";
-import React, { useState} from "react";
-
+import React, {useState, useMemo} from "react";
 import JoditEditor from "jodit-react";
+import { ToastContainer, toast } from 'react-toastify'
+import { doCreatePost } from "../../../services/admin/post-service";
 
-function Post({ placeholder }) {
-  const [content, setContent] = useState("");
-  const config = {
+function Post() {
+  const [post, setPost] = useState({
+    title: '',
+    content: ''
+  })
+
+  const configEditor = {
     zIndex: 0,
     readonly: false,
     activeButtonsInReadOnly: ["source", "fullsize", "print", "about"],
@@ -14,7 +19,7 @@ function Post({ placeholder }) {
     enableDragAndDropFileToEditor: true,
     saveModeInCookie: false,
     spellcheck: true,
-    editorCssClass: false,
+    editorCssclassName: false,
     triggerChangeEvent: true,
     height: 1000,
     direction: "ltr",
@@ -29,14 +34,11 @@ function Post({ placeholder }) {
     imageDefaultWidth: 100,
     removeButtons: [
       "source",
-      "fullsize",
       "about",
       "outdent",
       "indent",
-      "video",
       "print",
       "table",
-      "fontsize",
       "superscript",
       "subscript",
       "file",
@@ -50,44 +52,75 @@ function Post({ placeholder }) {
       insertImageAsBase64URI: true,
     },
     placeholder: "",
-    showXPathInStatusbar: false,
-  };
+    showXPathInStatusbar: false
+  }
+
+  const config = useMemo (() => (configEditor), [])
+   
+  const fieldChanged = (event) => {
+    console.log(event)
+    setPost({ ...post, [event.target.name]: event.target.value })
+  }
+
+  const contentFieldChanaged = (data) => {
+    setPost({ ...post, 'content': data })
+  }
+
+  const createPost = (event) => {
+
+    event.preventDefault();
+
+    doCreatePost(post).then(data => {
+      alert("Post created !!")
+      setPost({
+          title: '',
+          content: ''
+      })
+    }).catch((error) => {
+        alert("Post not created due to some error !!")
+        console.log(error)
+    })
+}
 
   return (
     <div>
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default">
-          Tiêu đề bài viết
-        </span>
-        <input
-          type="text"
-          class="form-control"
-          aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-default"
+      <form onSubmit={createPost}>
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="inputGroup-sizing-default">
+            Tiêu đề bài viết
+          </span>
+          <input
+            type="text"
+            className="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+            name="title"
+            value={post.title}
+            onChange={fieldChanged}
+          />
+        </div>
+        <JoditEditor
+          config={config}
+          value={post.content}
+          onChange={contentFieldChanaged}
         />
-      </div>
-      <JoditEditor
-        config={config}
-        // tabIndex of textarea
-        onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-        onChange={(newContent) => {}}
-      />
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          value=""
-          id="flexCheckDefault"
-        />
-        <label class="form-check-label" for="flexCheckDefault">
-          Public
-        </label>
-      </div>
-      <div class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-primary" type="button">
-          Post
-        </button>
-      </div>
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            value=""
+            id="flexCheckDefault"
+          />
+          <label className="form-check-label" htmlFor="flexCheckDefault">
+            Public
+          </label>
+        </div>
+        <div className="d-grid gap-2 col-6 mx-auto">
+          <button className="btn btn-primary" type="submit">
+            Post
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

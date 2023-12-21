@@ -1,20 +1,22 @@
 import "./ContentDetail.scss";
 import Sidebar from "../Sidebar";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { format } from 'date-fns';
+
 import { toast } from "react-toastify";
 
 import { loadPost } from '../../../services/admin/post-service';
 
 import blog_post_01 from "../../../assets/images/blog-post-02.jpg";
 
-function ContentDetail({ postDefault = { id: -1, title: "This is default post title", content: "This is default post content" }}) {
-  const [post, setPost] = useState(postDefault);
+function ContentDetail(props) {
+  const { postId } = useParams()
+  const [post, setPost] = useState({ id: 1 });
 
   useEffect(() => {
-    // load post of postId
-    loadPost(1)
+    loadPost(postId)
       .then((data) => {
-        console.log(data.title);
         setPost(data);
       })
       .catch((error) => {
@@ -47,8 +49,7 @@ function ContentDetail({ postDefault = { id: -1, title: "This is default post ti
                           <a href="#">{post.created_at}</a>
                         </li>
                       </ul>
-                      <p>
-                        {post.content}
+                      <p dangerouslySetInnerHTML={{ __html: post.content }}>
                       </p>
                       <div className="post-options">
                         <div className="row">

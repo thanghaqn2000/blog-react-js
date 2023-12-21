@@ -1,22 +1,18 @@
 import { myAxiosAdmin } from "../helper";
 //create post function
-// export const createPost = (postData) => {
-//   return privateAxios
-//     .post(
-//       `/posts/${postData.userId}/category/${postData.categoryId}/posts`,
-//       postData
-//     )
-//     .then((response) => response.data);
-// };
+export const doCreatePost = (postData) => {
+  return myAxiosAdmin
+    .post(
+      `/posts`,
+      postData
+    )
+    .then((response) => response.data);
+};
 
 //get all posts
 
 export const loadAllPosts = () => {
-  return myAxiosAdmin
-    .get(
-      `/posts`
-    )
-    .then((response) => response.data);
+  return myAxiosAdmin.get(`/posts`).then((response) => response.data);
 };
 
 //load single post of given id
