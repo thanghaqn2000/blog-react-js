@@ -2,10 +2,7 @@ import "./ContentDetail.scss";
 import Sidebar from "../Sidebar";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { format } from 'date-fns';
-
 import { toast } from "react-toastify";
-
 import { loadPost } from '../../../services/admin/post-service';
 
 import blog_post_01 from "../../../assets/images/blog-post-02.jpg";
@@ -13,16 +10,22 @@ import blog_post_01 from "../../../assets/images/blog-post-02.jpg";
 function ContentDetail(props) {
   const { postId } = useParams()
   const [post, setPost] = useState({ id: 1 });
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     loadPost(postId)
-      .then((data) => {
-        setPost(data);
-      })
-      .catch((error) => {
-        toast.error("Error in loading post");
-      });
+    .then((data) => {
+      setPost(data);
+    })
+    .catch(() => {
+      toast.error("Error in loading post");
+    })
+    .finally(() => setLoading(false));
   }, []);
+
+  if (loading) {
+    return null
+  }
 
   return (
     <section className="blog-posts grid-system">

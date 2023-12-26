@@ -26,7 +26,7 @@ function ShowListPost(props) {
             <a href="#">{props.post.created_at}</a>
           </li>
         </ul>
-        <p>{props.post.content}</p>
+        {/* <p>{props.post.content}</p> */}
         <div className="post-options">
           <div className="row">
             <div className="col-6">

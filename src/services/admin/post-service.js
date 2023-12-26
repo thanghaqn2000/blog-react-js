@@ -30,3 +30,6 @@ export const loadPost = (postId) => {
 //   console.log(post);
 //   return privateAxios.put(`/posts/${postId}`, post).then((resp) => resp.data);
 // }
+export const loadCategories = () => {
+  return myAxiosAdmin.get(`/posts/categories`).then((response) => response.data);
+};

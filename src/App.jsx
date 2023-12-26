@@ -4,27 +4,24 @@ import Header from "./components/Client/Header";
 import Footer from "./components/Client/Footer";
 import ContentDetail from "./components/Client/ContentDetail";
 import AdminPage from "./components/Admin/AdminPage";
+import ScrollToTop from "./components/Common/ScrollToTop";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <Router>
       <div className="App">
-        <Header></Header>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/content-detail/:postId" element={<ContentDetail />} />
-          {/* <Route
-            exact
-            path="/content-detail/:id"
-            render={(props) => <ContentDetail id={props.match.params.id} />}
-          /> */}
-          <Route path="/admin" element={<AdminPage />} />
-        </Routes>
+        <Header/>
+        {/* <ScrollToTop/> */}
+        <div style={{ flex: 1 }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/content-detail/:postId" element={<ContentDetail />} />
+            <Route path="/admin" element={<AdminPage />} />
+          </Routes>
+        </div>
         <Footer></Footer>
       </div>
-    </Router>
   );
 }
 
