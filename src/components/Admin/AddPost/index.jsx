@@ -6,17 +6,17 @@ import {
   loadCategories,
 } from "../../../services/admin/post-service";
 
-function Post() {
+function AddPost() {
   const [post, setPost] = useState({
     title: "",
     content: "",
     status: false,
     categoty: "",
   });
-  const [loading, setLoading] = useState(true)
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0,0)
     loadCategories()
       .then((data) => {
         setCategories(data);
@@ -24,7 +24,6 @@ function Post() {
       .catch((error) => {
         console.log(error);
       })
-      .finally(() => setLoading(false));;
   }, []);
 
   const configEditor = {
@@ -104,9 +103,6 @@ function Post() {
 
   const listCategories = Object.entries(categories);
 
-  if (loading) {
-    return null
-  }
 
   return (
     <div className="container-fluid">
@@ -176,4 +172,4 @@ function Post() {
   );
 }
 
-export default Post;
+export default AddPost;

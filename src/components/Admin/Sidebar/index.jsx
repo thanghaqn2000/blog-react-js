@@ -1,4 +1,4 @@
-import Post from "../Post";
+import AddPost from "../AddPost";
 import "./Sidebar.scss";
 import { useEffect } from 'react';
 
@@ -103,7 +103,7 @@ function Sidebar() {
             </button>
           </div>
         </nav>
-        <Post></Post>
+        <AddPost></AddPost>
       </div>
     </div>
   );

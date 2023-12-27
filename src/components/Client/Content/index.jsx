@@ -1,9 +1,8 @@
 import "./Content.scss";
 import Sidebar from "../Sidebar";
 import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
 import { Link, NavLink } from "react-router-dom";
-import { loadAllPosts } from "../../../services/admin/post-service";
+import { loadAllPosts } from "../../../services/api/post-service-v1";
 import blog_post_01 from "../../../assets/images/blog-post-02.jpg";
 
 function ShowListPost(props) {

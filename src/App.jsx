@@ -3,8 +3,8 @@ import Home from "./components/Client/Home";
 import Header from "./components/Client/Header";
 import Footer from "./components/Client/Footer";
 import ContentDetail from "./components/Client/ContentDetail";
+import UpdateBlog from "./components/Admin/UpdatePost";
 import AdminPage from "./components/Admin/AdminPage";
-import ScrollToTop from "./components/Common/ScrollToTop";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -17,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/content-detail/:postId" element={<ContentDetail />} />
+            <Route path="/update-post/:postId" element={<UpdateBlog />} />
             <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </div>
