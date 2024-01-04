@@ -1,9 +1,9 @@
-import "./Content.scss";
-import Sidebar from "../Sidebar";
+import "./ListPost.scss";
+import Sidebar from "../../Sidebar";
 import { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { loadAllPosts } from "../../../services/api/post-service-v1";
-import blog_post_01 from "../../../assets/images/blog-post-02.jpg";
+import { NavLink } from "react-router-dom";
+import { loadAllPosts } from "../../../../services/api/post-service-v1";
+import blog_post_01 from "../../../../assets/images/blog-post-02.jpg";
 
 function ShowListPost(props) {
   return (
@@ -58,7 +58,7 @@ function ShowListPost(props) {
   );
 }
 
-function Content() {
+function ListPost() {
   const [listPost, setListPost] = useState([]);
 
   useEffect(() => {
@@ -67,7 +67,6 @@ function Content() {
         setListPost(data);
       })
       .catch((error) => {
-        console.log(error);
       });
   }, []);
 
@@ -98,4 +97,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default ListPost;

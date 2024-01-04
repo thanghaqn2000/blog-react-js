@@ -1,21 +1,30 @@
-import React from "react";
-import { useState, useEffect, useContext, useMemo } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import {
-  loadPost,
-  updatePost as doUpdatePost,
-  loadCategories,
-  deletePost,
-} from "../../../services/admin/post-service";
+import "./AddPost.scss";
+import React, { useState, useMemo, useEffect } from "react";
 import JoditEditor from "jodit-react";
+import {
+  doCreatePost,
+  loadCategories,
+} from "../../../../services/admin/post-service";
 
-function UpdateBlog() {
+function AddPost() {
+  const [post, setPost] = useState({
+    title: "",
+    content: "",
+    status: 0,
+    categoty: "",
+  });
   const [categories, setCategories] = useState([]);
 
-  const { postId } = useParams();
-  const [post, setPost] = useState({ id: 1 });
-  const navigate = useNavigate()
+  useEffect(() => {
+    window.scrollTo(0,0)
+    loadCategories()
+      .then((data) => {
+        setCategories(data);
+      })
+      .catch((error) => {
+      })
+  }, []);
+
   const configEditor = {
     zIndex: 0,
     readonly: false,
@@ -60,65 +69,42 @@ function UpdateBlog() {
     placeholder: "",
     showXPathInStatusbar: false,
   };
+
   const config = useMemo(() => configEditor, []);
-
-  useEffect(() => {
-    loadCategories()
-      .then((data) => {
-        setCategories(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    loadPost(postId)
-      .then((data) => {
-        console.log(data);
-        setPost(data);
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("error in loading the blog");
-      });
-  }, []);
-
-  const handleChange = (event, fieldName) => {
-    setPost({
-      ...post,
-      [fieldName]: event.target.value,
-    });
+  const fieldChanged = (event) => {
+    setPost({ ...post, [event.target.name]: event.target.value });
+  };
+  const statusFieldChanged = (event) => {
+    const value = event.target.checked ? 1 : 0;
+    setPost({ ...post, status: value });
+  };
+  const contentFieldChanaged = (data) => {
+    setPost({ ...post, content: data });
   };
 
-  const updatePost = (event) => {
+  const createPost = (event) => {
     event.preventDefault();
-    console.log(post);
-    doUpdatePost(post, post.id)
-      .then((res) => {
-        console.log(res);
-        alert("Update success!");
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Update fail");
-      });
-  };
 
-  const doDeletePost = () => {
-    deletePost(postId)
+    doCreatePost(post)
       .then((data) => {
-        alert("Remove success")
-        navigate("/")
+        alert("Post created !!");
+        setPost({
+          title: "",
+          content: "",
+        });
       })
       .catch((error) => {
+        alert("Post not created due to some error !!");
         console.log(error);
-        alert("Remove fail")
       });
   };
 
   const listCategories = Object.entries(categories);
+
+
   return (
     <div className="container-fluid">
-      <form onSubmit={updatePost}>
+      <form onSubmit={createPost}>
         <div className="col-lg-12 d-flex mb-2">
           <div className="col-lg-4">
             <div className="input-group mb-3">
@@ -132,7 +118,7 @@ function UpdateBlog() {
                 aria-describedby="inputGroup-sizing-default"
                 name="title"
                 value={post.title}
-                onChange={(event) => handleChange(event, "title")}
+                onChange={fieldChanged}
               />
             </div>
           </div>
@@ -142,8 +128,7 @@ function UpdateBlog() {
               className="form-select"
               aria-label="Default select example"
               name="category"
-              onChange={(event) => handleChange(event, "category")}
-              value={post.category}
+              onChange={fieldChanged}
             >
               <option disabled value={0}>
                 --Chon the loai--
@@ -166,21 +151,18 @@ function UpdateBlog() {
             value={post.status}
             id="flexCheckDefault"
             name="status"
-            checked={post.status}
-            // onChange={statusFieldChanged}
+            // checked={post.status}
+            onChange={statusFieldChanged}
           />
         </div>
         <JoditEditor
           config={config}
           value={post.content}
-          onChange={(newContent) => setPost({ ...post, content: newContent })}
+          onChange={contentFieldChanaged}
         />
         <div className="d-grid gap-2 col-6 mx-auto">
           <button className="btn btn-primary" type="submit">
-            Update
-          </button>
-          <button className="btn btn-danger" type="button" onClick={doDeletePost}>
-            Delete
+            Post
           </button>
         </div>
       </form>
@@ -188,4 +170,4 @@ function UpdateBlog() {
   );
 }
 
-export default UpdateBlog;
+export default AddPost;

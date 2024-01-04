@@ -1,11 +1,11 @@
 import "./ContentDetail.scss";
-import Sidebar from "../Sidebar";
+import Sidebar from "../../Sidebar";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { loadPost } from '../../../services/api/post-service-v1';
+import { loadPost } from '../../../../services/api/post-service-v1';
 
-import blog_post_01 from "../../../assets/images/blog-post-02.jpg";
+import blog_post_01 from "../../../../assets/images/blog-post-02.jpg";
 
 function ContentDetail(props) {
   const { postId } = useParams()
