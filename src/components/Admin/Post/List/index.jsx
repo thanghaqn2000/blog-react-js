@@ -5,6 +5,7 @@ import {
 } from "../../../../services/admin/post-service";
 
 import { useState, useEffect } from "react";
+import ModalDelete from "../../../Common/ModalDelete";
 
 function ShowListPost(props) {
   const doDeletePost = (postId) => {
@@ -31,57 +32,18 @@ function ShowListPost(props) {
       <td>{props.post.status}</td>
       <td>{props.post.created_at}</td>
       <td>
-        <div className="action-btn">
-          <button className="btn btn-primary">Update</button>
+        <div className="action-btn flex space-x-4">
           <button
+            className="block text-white bg-green-600 hover:bg-green-700 focus:ring-4
+            focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center"
             type="button"
-            class="btn btn-danger ms-2"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
           >
-            Delete
+            Update
           </button>
-
-          <div
-            class="modal fade"
-            id="exampleModal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
-                   Alert
-                  </h5>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div class="modal-body">Chan chac chua ?</div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    onClick={() => doDeletePost(props.post.id)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ModalDelete
+            id={props.post.id}
+            deleteAction={doDeletePost}
+            message="Are you sure you want to delete this post?"/>
         </div>
       </td>
     </tr>
