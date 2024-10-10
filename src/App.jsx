@@ -8,6 +8,7 @@ import AddPost from "./components/Admin/Post/Add";
 import UpdateBlog from "./components/Admin/Post/Update";
 import ListPost from "./components/Admin/Post/List";
 
+
 import { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -15,6 +16,7 @@ import {
   Routes,
   useNavigate,
 } from "react-router-dom";
+import ScrollToTop from "./components/Common/ScrollToTop";
 
 
 function App() {
@@ -33,6 +35,7 @@ function App() {
 
   return (
     <div className="App">
+      <ScrollToTop />
       {showHeader && <Header />}
       <div style={{ flex: 1 }}>
         <Routes>
