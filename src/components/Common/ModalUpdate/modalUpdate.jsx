@@ -57,7 +57,6 @@ function ModalUpdate({ updateAction, message }) {
 
               <div className="p-4 text-center">
                 <h3 className="mb-5 text-lg font-normal text-gray-500">{message}</h3>
-
                 <button
                   onClick={handleUpdate}
                   className={`text-white bg-green-600 hover:bg-green-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
