@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-function ModalDelete({ id, deleteAction, message }) {
+function ModalDelete({ id, deleteAction, message, isShowText }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -24,7 +26,7 @@ function ModalDelete({ id, deleteAction, message }) {
           focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center"
         type="button"
       >
-        Delete
+        {isShowText ? "Delete" :  <FontAwesomeIcon icon={faTrash} size="lg" />}
       </button>
 
       {isOpen && (
@@ -33,7 +35,6 @@ function ModalDelete({ id, deleteAction, message }) {
         >
           <div className="relative p-4 w-full max-w-md">
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-              {/* Nút đóng modal */}
               <button
                 onClick={closeModal}
                 type="button"

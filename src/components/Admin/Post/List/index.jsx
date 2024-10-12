@@ -6,6 +6,9 @@ import {
 
 import { useState, useEffect } from "react";
 import ModalDelete from "../../../Common/ModalDelete";
+import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faL, faPencil } from "@fortawesome/free-solid-svg-icons";
 
 function ShowListPost(props) {
   const doDeletePost = (postId) => {
@@ -27,23 +30,24 @@ function ShowListPost(props) {
     <tr>
       <th scope="row">{props.post.id}</th>
       <td>{props.post.title}</td>
-      <td>{props.post.title}</td>
       <td>{props.post.category}</td>
       <td>{props.post.status}</td>
       <td>{props.post.created_at}</td>
       <td>
         <div className="action-btn flex space-x-4">
-          <button
+          <NavLink
+            to={`/admin/update-post/${props.post.id}`}
             className="block text-white bg-green-600 hover:bg-green-700 focus:ring-4
             focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center"
-            type="button"
           >
-            Update
-          </button>
+            <FontAwesomeIcon icon={faPencil} size="lg" />
+          </NavLink>
           <ModalDelete
             id={props.post.id}
             deleteAction={doDeletePost}
-            message="Are you sure you want to delete this post?"/>
+            message="Are you sure you want to delete this post?"
+            isShowText={false}
+            />
         </div>
       </td>
     </tr>
@@ -71,7 +75,6 @@ function ListPost() {
         <tr>
           <th scope="col">Id</th>
           <th scope="col">Title</th>
-          <th scope="col">Content</th>
           <th scope="col">Category</th>
           <th scope="col">Status</th>
           <th scope="col">Created at</th>
