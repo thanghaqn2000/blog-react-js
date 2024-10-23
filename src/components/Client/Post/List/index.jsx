@@ -4,15 +4,17 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { loadAllPosts } from "../../../../services/api/post-service-v1";
 import blog_post_01 from "../../../../assets/images/blog-post-02.jpg";
+import FormatDateTime from "../../../Common/FormatDateTime";
+
 
 function ShowListPost(props) {
   return (
     <div className="blog-post">
       <div className="blog-thumb">
-        <img src={blog_post_01} alt="" />
+        <img className="img-list" src={props.post.image_url} alt="" />
+        {/* <img src={blog_post_01} alt="" /> */}
       </div>
       <div className="down-content">
-        <span>Lifestyle</span>
         <NavLink to={`/content-detail/${props.post.id}`}>
           <h4>{props.post.title}</h4>
         </NavLink>
@@ -22,7 +24,7 @@ function ShowListPost(props) {
             <a href="#">Admin</a>
           </li>
           <li>
-            <a href="#">{props.post.created_at}</a>
+            <span><FormatDateTime dateString={props.post.created_at}/></span>
           </li>
         </ul>
         {/* <p>{props.post.content}</p> */}
