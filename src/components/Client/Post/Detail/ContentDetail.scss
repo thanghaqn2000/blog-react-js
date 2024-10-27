@@ -12,22 +12,16 @@
 	overflow: hidden;
 }
 
-.blog-posts .down-content {
-	padding: 40px;
-	border-right: 1px solid #eee;
-	border-left: 1px solid #eee;
-	border-bottom: 1px solid #eee;
-}
-
-.blog-posts .down-content span {
-	font-size: 18px;
-	text-transform: uppercase;
+.blog-posts .down-content h4 {
+	font-size: 24px;
+	text-transform: capitalize;
 	letter-spacing: 0.5px;
 	font-weight: 900;
-	color: #f48840;
+	color: #20232e;
+	margin: 10px 0px 12px 0px;
 }
 
-.blog-posts .down-content h4 {
+.blog-posts .down-content h1 {
 	font-size: 24px;
 	text-transform: capitalize;
 	letter-spacing: 0.5px;
@@ -56,6 +50,11 @@
 	letter-spacing: 0.25px;
 }
 
+.blog-posts .down-content h1 {
+	font-size: 20px;
+	letter-spacing: 0.25px;
+}
+
 .grid-system .down-content ul.post-info li {
 	margin-right: 3px;
 }
@@ -77,13 +76,6 @@
 
 .blog-posts .down-content ul.post-info li a:hover {
 	color: #f48840;
-}
-
-.blog-posts .down-content p {
-	padding: 25px 0px;
-	margin: 25px 0px;
-	border-top: 1px solid #eee;
-	border-bottom: 1px solid #eee;
 }
 
 .blog-posts .down-content ul.post-share {
@@ -177,6 +169,10 @@ ul.page-numbers li a:hover {
 	color: #f48840;
 }
 
+.all-blog-posts {
+	margin-left: 100px;
+}
+
 .blog-posts .sidebar-heading h2 {
 	font-size: 18px;
 	text-transform: uppercase;
@@ -186,10 +182,6 @@ ul.page-numbers li a:hover {
 	border-bottom: 1px solid #eee;
 	padding-bottom: 15px;
 	margin-bottom: 25px;
-}
-
-.blog-posts .comments {
-	margin-top: 30px;
 }
 
 .blog-posts .comments ul li {

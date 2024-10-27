@@ -8,13 +8,15 @@ import { useState, useEffect } from "react";
 import ModalDelete from "../../../Common/ModalDelete";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faL, faPencil } from "@fortawesome/free-solid-svg-icons";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
+import FormatDateTime from "../../../Common/FormatDateTime";
 
 function ShowListPost(props) {
   const doDeletePost = (postId) => {
     deletePost(postId)
       .then((data) => {
-        alert("Remove success");
+        toast.success("Remove success!")
         loadAllPosts()
           .then((data) => {
             props.updateListPost(data);
@@ -22,7 +24,7 @@ function ShowListPost(props) {
           .catch((error) => {});
       })
       .catch((error) => {
-        alert("Remove fail");
+        toast.success("Remove fail!")
       });
   };
 
@@ -32,7 +34,7 @@ function ShowListPost(props) {
       <td>{props.post.title}</td>
       <td>{props.post.category}</td>
       <td>{props.post.status}</td>
-      <td>{props.post.created_at}</td>
+      <td><FormatDateTime dateString={props.post.created_at}/></td>
       <td>
         <div className="action-btn flex space-x-4">
           <NavLink

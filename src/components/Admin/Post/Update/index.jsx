@@ -9,10 +9,13 @@ import {
 } from "../../../../services/admin/post-service";
 import JoditEditor from "jodit-react";
 import ModalDelete from "../../../Common/ModalDelete";
-import ModalUpdate from "../../../Common/ModalUpdate/modalUpdate";
+import ModalUpdate from "../../../Common/ModalUpdate";
+import ImageUpload from "../../../Common/ImageUpload";
 
 function UpdateBlog() {
   const [categories, setCategories] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [existingImageUrl, setExistingImageUrl] = useState(null);
   const { postId } = useParams();
   const [post, setPost] = useState({ id: 1 });
   const navigate = useNavigate();
@@ -33,7 +36,10 @@ function UpdateBlog() {
 
   useEffect(() => {
     loadCategories().then(setCategories).catch(() => toast.error("Error loading categories"));
-    loadPost(postId).then(setPost).catch(() => toast.error("Error loading the post"));
+    loadPost(postId).then((data) => {
+      setPost(data);
+      setExistingImageUrl(data.image_url);
+    });
   }, [postId]);
 
   const handleChange = (event, fieldName) => {
@@ -51,8 +57,17 @@ function UpdateBlog() {
   };
 
   const updatePost = async () => {
+    const formData = new FormData();
+    formData.append("post[title]", post.title);
+    formData.append("post[content]", post.content);
+    formData.append("post[status]", post.status);
+    formData.append("post[category]", post.category);
+  
+    if (selectedImage) {
+      formData.append("image", selectedImage);
+    }
     try {
-      await doUpdatePost(post, post.id);
+      await doUpdatePost(formData, post.id);
       toast.success("Update success!")
       navigate("/admin/list-post");
     } catch (error) {
@@ -70,6 +85,10 @@ function UpdateBlog() {
     }
   };
 
+  const handleImageSelect = (image) => {
+    setSelectedImage(image);
+  };
+
   return (
     <div className="container-fluid">
       <div className="col-lg-12 d-flex mb-2">
@@ -84,7 +103,6 @@ function UpdateBlog() {
               onChange={(event) => handleChange(event, "title")}
             />
           </div>
-
         </div>
         <div className="col-lg-1"></div>
         <div className="col-lg-7">
@@ -103,6 +121,7 @@ function UpdateBlog() {
           </select>
         </div>
       </div>
+      <ImageUpload onImageSelect={handleImageSelect} existingImageUrl={existingImageUrl}></ImageUpload>
       <div className="form-check">
         <label className="form-check-label" htmlFor="flexCheckDefault">
           Public
