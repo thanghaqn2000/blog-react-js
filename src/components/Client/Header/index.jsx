@@ -37,7 +37,7 @@ function Header() {
               className="navbar-brand"
             >
               <h2>
-                Dtee Blog<em>.</em>
+                Long Mạch Blog<em>.</em>
               </h2>
             </NavLink>
             <button
@@ -62,22 +62,22 @@ function Header() {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="about.html">
-                  About
+                  Giới thiệu
                 </a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="blog.html">
-                  Blog Entries
+                  Dịch vụ
                 </a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="post-details.html">
-                  Post Details
+                  Sách chứng khoán
                 </a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="contact.html">
-                  Contact Us
+                  Liên hệ
                 </a>
               </li>
             </ul>
