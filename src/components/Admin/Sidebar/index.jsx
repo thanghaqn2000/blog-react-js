@@ -1,6 +1,6 @@
 import "./Sidebar.scss";
 import { useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Sidebar() {
   const setFullHeight = () => {
@@ -8,6 +8,12 @@ function Sidebar() {
     elements.forEach((element) => {
       element.style.height = `${window.innerHeight}px`;
     });
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    window.location.href = '/login_admin';
   };
 
   useEffect(() => {
@@ -70,7 +76,14 @@ function Sidebar() {
             <a href="#">Portfolio</a>
           </li>
           <li>
-            <a href="#">Contact</a>
+          <div className="flex items-center justify-center py-2">
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              onClick={handleLogout}
+            >
+              Log out
+            </button>
+          </div>
           </li>
         </ul>
       </div>

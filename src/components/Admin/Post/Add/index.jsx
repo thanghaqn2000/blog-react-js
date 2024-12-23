@@ -20,7 +20,7 @@ function AddPost() {
   });
   const [categories, setCategories] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [existingImageUrl, setExistingImageUrl] = useState(null);
+  const [existingImageUrl] = useState(null);
   const navigate = useNavigate();
   const listCategories = Object.entries(categories);
 
