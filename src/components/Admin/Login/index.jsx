@@ -3,13 +3,21 @@ import { toast } from "react-toastify";
 import { login } from '../../../services/admin/authen-service';
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const LoginAdmin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const accessToken = localStorage.getItem('access_token');
 
+  useEffect(() => {
+
+    if (accessToken) {
+      navigate('/admin/list-post');
+    }
+  }, [accessToken, navigate]);
   const handleLogin = async (event) => {
     event.preventDefault();
     setIsLoading(true);
