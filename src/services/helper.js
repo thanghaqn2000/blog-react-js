@@ -9,17 +9,4 @@ export const myAxiosApi = axios.create({
 
 export const myAxiosAdmin = axios.create({
   baseURL: BASE_URL_ADMIN,
-  validateStatus: function (status) {
-    return status < 500;
-  },
-});
-
-myAxiosAdmin.interceptors.request.use((config) => {
-  const accessToken = localStorage.getItem('access_token');
-  if (accessToken) {
-    config.headers.JWTAuthorization = `Bearer ${accessToken}`;
-  }
-  return config;
-}, (error) => {
-  return Promise.reject(error);
 });

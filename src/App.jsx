@@ -11,12 +11,13 @@ import ListPost from "./components/Admin/Post/List";
 
 import { useState, useEffect } from "react";
 import {
+  BrowserRouter as Router,
   Route,
   Routes,
   useNavigate,
 } from "react-router-dom";
 import ScrollToTop from "./components/Common/ScrollToTop";
-import LoginAdmin from "./components/Admin/Login";
+
 
 function App() {
   const [showHeader, setShowHeader] = useState(true);
@@ -40,7 +41,6 @@ function App() {
         <Routes>
           <Route path="content-detail/:postId" element={<ContentDetail />} />
           <Route path="/" element={<Home />}/>
-          <Route path="/login_admin" element={<LoginAdmin />}/>
           <Route path="/admin" element={<AdminPage />}>
             <Route path="add-post" element={<AddPost />} />
             <Route path="update-post/:postId" element={<UpdateBlog />} />
