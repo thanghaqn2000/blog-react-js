@@ -7,7 +7,8 @@ import AdminPage from "./components/Admin/Home";
 import AddPost from "./components/Admin/Post/Add";
 import UpdateBlog from "./components/Admin/Post/Update";
 import ListPost from "./components/Admin/Post/List";
-
+import AdminGuard from "./components/Admin/Guard";
+import NotFoundPage from "./components/Common/NotFoundPage";
 
 import { useState, useEffect } from "react";
 import {
@@ -21,16 +22,15 @@ import LoginAdmin from "./components/Admin/Login";
 function App() {
   const [showHeader, setShowHeader] = useState(true);
   const navigate = useNavigate();
+  const accessToken = localStorage.getItem('access_token');
 
   useEffect(() => {
     // Kiểm tra nếu path chứa "admin", ẩn Header và load lại trang
     const currentPath = window.location.pathname;
-    setShowHeader(!currentPath.includes("admin"));
-
-    // if (currentPath.includes("admin")) {
-    //   navigate("/admin"); // Điều hướng đến "/admin" và load lại trang
-    // }
-  }, [navigate]);
+    if(currentPath.includes("admin") && accessToken){
+      setShowHeader(false);
+    }
+  }, [accessToken, navigate]);
 
   return (
     <div className="App">
@@ -41,11 +41,12 @@ function App() {
           <Route path="content-detail/:postId" element={<ContentDetail />} />
           <Route path="/" element={<Home />}/>
           <Route path="/login_admin" element={<LoginAdmin />}/>
-          <Route path="/admin" element={<AdminPage />}>
+          <Route path="/admin" element={<AdminGuard><AdminPage /></AdminGuard>}>
             <Route path="add-post" element={<AddPost />} />
             <Route path="update-post/:postId" element={<UpdateBlog />} />
             <Route path="list-post" element={<ListPost />} />
           </Route>
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
       <Footer></Footer>
