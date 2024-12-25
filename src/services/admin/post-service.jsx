@@ -9,9 +9,19 @@ export const doCreatePost = async (postData) => {
   return response.data;
 };
 
-export const loadAllPosts = async () => {
-  const response = await myAxiosAdmin.get(`/posts`);
-  return response.data;
+
+export const loadAllPosts = async (options = {}) => {
+  const { page = 1, per_page = 10 } = options; 
+  try {
+    const response = await myAxiosAdmin
+      .get(`/posts`, {
+        params: { page, per_page },
+      });
+    return response.data;
+  } catch (error) {
+    console.error("Error loading posts:", error);
+    throw error;
+  }
 };
 
 export const loadPost = async (postId) => {

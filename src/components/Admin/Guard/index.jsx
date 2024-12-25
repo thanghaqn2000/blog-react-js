@@ -1,11 +1,11 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import NotFoundPage from "../../Common/NotFoundPage";
 
 const AdminGuard = ({ children }) => {
   const isAdmin = localStorage.getItem("access_token");
 
   if (!isAdmin) {
-    return <Navigate to="/" />;
+    return <NotFoundPage />;
   }
 
   return children; 
