@@ -3,9 +3,8 @@ import Sidebar from "../../Sidebar";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { loadAllPosts } from "../../../../services/api/post-service-v1";
-import blog_post_01 from "../../../../assets/images/blog-post-02.jpg";
 import FormatDateTime from "../../../Common/FormatDateTime";
-
+import Pagination from "../../../Common/Pagination";
 
 function ShowListPost(props) {
   return (
@@ -62,15 +61,27 @@ function ShowListPost(props) {
 
 function ListPost() {
   const [listPost, setListPost] = useState([]);
+  const [metaPagination, setMetaPagination] = useState([]);
 
-  useEffect(() => {
-    loadAllPosts()
-      .then((data) => {
-        setListPost(data);
+  const fetchPosts = (page = 1) => {
+    loadAllPosts({page: page})
+      .then((posts) => {
+        setListPost(posts.data);
+        setMetaPagination(posts.meta);
+        window.scrollTo({ top: 0, behavior: "smooth" });
       })
       .catch((error) => {
+        console.error("Error fetching posts:", error);
       });
-  }, []);
+  };
+
+  const handlePageChange = (page) => {
+    fetchPosts(page);
+  };
+
+  useEffect(() => {
+    fetchPosts(); 
+  }, [])
 
   return (
     <section className="blog-posts header-text">
@@ -84,11 +95,9 @@ function ListPost() {
                     <ShowListPost post={post} key={index}></ShowListPost>
                   ))}
                 </div>
-                <div className="col-lg-12">
-                  <div className="main-button">
-                    <a href="blog.html">View All Posts</a>
-                  </div>
-                </div>
+                {metaPagination.total_pages > 1 && (
+                  <Pagination meta={metaPagination} onPageChange={handlePageChange} />
+                )}
               </div>
             </div>
           </div>
