@@ -11,11 +11,11 @@ export const doCreatePost = async (postData) => {
 
 
 export const loadAllPosts = async (options = {}) => {
-  const { page = 1, per_page = 10 } = options; 
+  const { page = 1, per_page = 10, title} = options; 
   try {
     const response = await myAxiosAdmin
       .get(`/posts`, {
-        params: { page, per_page },
+        params: { page, per_page, title },
       });
     return response.data;
   } catch (error) {

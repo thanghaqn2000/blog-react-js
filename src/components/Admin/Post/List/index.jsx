@@ -4,14 +4,16 @@ import {
   deletePost,
 } from "../../../../services/admin/post-service";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ModalDelete from "../../../Common/ModalDelete";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
+import debounce from "lodash.debounce";
 import FormatDateTime from "../../../Common/FormatDateTime";
 import Pagination from "../../../Common/Pagination";
+import SearchBar from "../../../Client/SearchBar";
 
 function ShowListPost(props) {
   const { post, fetchPosts } = props;
@@ -61,9 +63,10 @@ function ShowListPost(props) {
 function ListPost() {
   const [listPost, setListPost] = useState([]);
   const [metaPagination, setMetaPagination] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const fetchPosts = (page = 1) => {
-    loadAllPosts({ page })
+  const fetchPosts = (page = 1, title = "") => {
+    loadAllPosts({ page: page, title: title })
       .then((posts) => {
         setListPost(posts.data);
         setMetaPagination(posts.meta);
@@ -73,8 +76,19 @@ function ListPost() {
       });
   };
 
+    const debouncedFetchPosts = useCallback(
+      debounce((search) => fetchPosts(1, search), 500),
+      []
+    );
+  
+    const handleSearch = (search) => {
+      setSearchTerm(search);
+      debouncedFetchPosts(search);
+    };
+  
+
   const handlePageChange = (page) => {
-    fetchPosts(page);
+    fetchPosts(page, searchTerm);
   };
 
   useEffect(() => {
@@ -82,32 +96,35 @@ function ListPost() {
   }, []);
 
   return (
-    <table className="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Title</th>
-          <th scope="col">Category</th>
-          <th scope="col">Status</th>
-          <th scope="col">Created at</th>
-          <th scope="col" colSpan={2}>
-            Action
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {listPost.map((post, index) => (
-          <ShowListPost
-            post={post}
-            key={index}
-            fetchPosts={fetchPosts}
-          />
-        ))}
-        {metaPagination.total_pages > 1 && (
-          <Pagination meta={metaPagination} onPageChange={handlePageChange} />
-        )}
-      </tbody>
-    </table>
+    <div className="mt-3">
+      <SearchBar onSearch={handleSearch}></SearchBar>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Category</th>
+            <th scope="col">Status</th>
+            <th scope="col">Created at</th>
+            <th scope="col" colSpan={2}>
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {listPost.map((post, index) => (
+            <ShowListPost
+              post={post}
+              key={index}
+              fetchPosts={fetchPosts}
+            />
+          ))}
+          {metaPagination.total_pages > 1 && (
+            <Pagination meta={metaPagination} onPageChange={handlePageChange} />
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

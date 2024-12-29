@@ -1,32 +1,31 @@
 import "./ListPost.scss";
 import Sidebar from "../../Sidebar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { NavLink } from "react-router-dom";
+import debounce from "lodash.debounce";
 import { loadAllPosts } from "../../../../services/api/post-service-v1";
 import FormatDateTime from "../../../Common/FormatDateTime";
 import Pagination from "../../../Common/Pagination";
+import SearchBar from "../../SearchBar";
 
 function ShowListPost(props) {
   return (
     <div className="blog-post">
       <div className="blog-thumb">
         <img className="img-list" src={props.post.image_url} alt="" />
-        {/* <img src={blog_post_01} alt="" /> */}
       </div>
       <div className="down-content">
         <NavLink to={`/content-detail/${props.post.id}`}>
           <h4>{props.post.title}</h4>
         </NavLink>
-        <a href="post-details.html"></a>
         <ul className="post-info">
           <li>
             <a href="#">Admin</a>
           </li>
           <li>
-            <span><FormatDateTime dateString={props.post.created_at}/></span>
+            <span><FormatDateTime dateString={props.post.created_at} /></span>
           </li>
         </ul>
-        {/* <p>{props.post.content}</p> */}
         <div className="post-options">
           <div className="row">
             <div className="col-6">
@@ -62,9 +61,10 @@ function ShowListPost(props) {
 function ListPost() {
   const [listPost, setListPost] = useState([]);
   const [metaPagination, setMetaPagination] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const fetchPosts = (page = 1) => {
-    loadAllPosts({page: page})
+  const fetchPosts = (page = 1, title = "") => {
+    loadAllPosts({ page: page, title: title })
       .then((posts) => {
         setListPost(posts.data);
         setMetaPagination(posts.meta);
@@ -75,19 +75,32 @@ function ListPost() {
       });
   };
 
+  const debouncedFetchPosts = useCallback(
+    debounce((search) => fetchPosts(1, search), 500),
+    []
+  );
+
+  const handleSearch = (search) => {
+    setSearchTerm(search);
+    debouncedFetchPosts(search);
+  };
+
   const handlePageChange = (page) => {
-    fetchPosts(page);
+    fetchPosts(page, searchTerm);
   };
 
   useEffect(() => {
-    fetchPosts(); 
-  }, [])
+    fetchPosts();
+  }, []);
 
   return (
     <section className="blog-posts header-text">
       <div className="container">
         <div className="row">
           <div className="col-lg-8">
+            <div className="search-bar" style={{ marginLeft: "100px", marginBottom: "20px" }}>
+              <SearchBar onSearch={handleSearch}></SearchBar>
+            </div>
             <div className="all-blog-posts">
               <div className="row">
                 <div className="col-lg-12">
