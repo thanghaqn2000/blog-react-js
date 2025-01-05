@@ -1,4 +1,4 @@
-const configEditor = {
+export const configEditor = {
   zIndex: 0,
   readonly: false,
   activeButtonsInReadOnly: ["source", "fullsize", "print", "about"],
@@ -42,5 +42,3 @@ const configEditor = {
   placeholder: "",
   showXPathInStatusbar: false,
 };
-
-export default configEditor;

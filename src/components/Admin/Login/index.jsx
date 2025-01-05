@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { toast } from "react-toastify";
-import { login } from '../../../services/admin/authen-service';
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import {isExpiredToken, setToken} from '../../../utils';
+import { login } from '../../../services/admin/authen-service';
 
 const LoginAdmin = () => {
   const [email, setEmail] = useState('');
@@ -13,13 +14,12 @@ const LoginAdmin = () => {
   const accessToken = localStorage.getItem('access_token');
 
   useEffect(() => {
-
-    if (accessToken) {
+    if (accessToken && !isExpiredToken(accessToken)) {
       navigate('/admin/list-post');
     }
   }, [accessToken, navigate]);
   const handleLogin = async (event) => {
-    event.preventDefault();
+    event.preventDefault();  
     setIsLoading(true);
     try {
       const response = await login({
@@ -28,13 +28,14 @@ const LoginAdmin = () => {
           password
         }
       });
-      if (response && response.status === 401) {
+      if (response?.status === 401) {
         toast.error('Tài khoản hoặc mật khẩu không đúng');
-      } else {
-        localStorage.setItem('access_token', response.token_info.access_token);
-        localStorage.setItem('refresh_token', response.token_info.refresh_token);
+      } else if(response?.token_info?.access_token) {
+        setToken(response.token_info.access_token, response.token_info.refresh_token);
         toast.success("Xin chào admin!");
         navigate("/admin/list-post");
+      } else { 
+        toast.error('Đã xảy ra lỗi, vui lòng thử lại.');
       }
     } catch (error) {}
     finally {
