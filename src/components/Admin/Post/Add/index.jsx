@@ -2,13 +2,13 @@ import "./AddPost.scss";
 import React, { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import JoditEditor from "jodit-react";
+import { toast } from "react-toastify";
 import {
   doCreatePost,
   loadCategories,
 } from "../../../../services/admin/post-service";
 import ModalCreate from "../../../Common/ModalCreate";
-import { toast } from "react-toastify";
-import configEditor from "../../../../ultils/constant";
+import { configEditor } from "../../../../utils";
 import ImageUpload from "../../../Common/ImageUpload";
 
 function AddPost() {
