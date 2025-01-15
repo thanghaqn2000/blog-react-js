@@ -1,5 +1,6 @@
 /* Header Style */
 header {
+	margin-bottom: 65px;
   position: relative !important;
   z-index: 99999 !important;
 	width: 100%;
@@ -37,6 +38,17 @@ header {
 	margin-top: -12px;
 	outline: none;
 }
+
+.nav-header-bot h2 {
+	color: #1e1e1e;
+	text-transform: uppercase;
+	font-size: 24px;
+	font-weight: 900;
+	-webkit-transition: all .3s ease 0s;
+    -moz-transition: all .3s ease 0s;
+    -o-transition: all .3s ease 0s;
+    transition: all .3s ease 0s;
+}
 .navbar .navbar-brand h2 {
 	color: #1e1e1e;
 	text-transform: uppercase;
@@ -58,9 +70,14 @@ header {
 .navbar-collapse {
 	text-align: center;
 }
-.navbar .navbar-nav .nav-item {
+.navbar .navbar-nav .nav-header-down {
 	margin: 0px 15px;
 }
+
+// .nav-header-down a:hover{
+// 	color: white;
+// }
+
 .navbar .navbar-nav a.nav-link {
 	text-transform: capitalize;
 	font-size: 15px;

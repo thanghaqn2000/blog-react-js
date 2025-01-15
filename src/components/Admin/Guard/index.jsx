@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import NotFoundPage from "../../Common/NotFoundPage";
 import { isExpiredToken, setToken } from "../../../utils";
 import { refreshTokenAdmin } from "../../../services/admin/authen-service";
+import { toast } from "react-toastify";
 
 const AdminGuard = ({ children }) => {
   const navigate = useNavigate();
@@ -19,9 +20,9 @@ const AdminGuard = ({ children }) => {
         if (accessToken && refreshToken) {
           setIsAuthenticated(true);
 
-          if(isExpiredToken(accessToken)) {
+          if(isExpiredToken(accessToken) && !isExpiredToken(refreshToken)) {
             await refreshAccessToken(refreshToken);
-          } else if(isExpiredToken(refreshToken)) {
+          } else if(isExpiredToken(refreshToken) && isExpiredToken(accessToken)) {
             navigate("/login_admin");
           }
         } else {
@@ -48,7 +49,8 @@ const AdminGuard = ({ children }) => {
       setToken(access_token, refresh_token);
       setIsAuthenticated(true);
     } catch (error) {
-      console.error("Error refreshing token:", error);
+      toast.error("Something wrong");
+      navigate("/login_admin");
     }
   };
 
