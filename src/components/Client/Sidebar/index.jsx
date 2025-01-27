@@ -22,52 +22,52 @@ function Sidebar() {
                 <h2>Xếp hạng cổ phiếu</h2>
               </div>
               <div className="content">
-                <div class="relative overflow-x-auto">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <div className="relative overflow-x-auto">
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                      <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" className="px-6 py-3">
                               Hạng
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" className="px-6 py-3">
                                 Tên cổ phiếu
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" className="px-6 py-3">
                                 Giá
                             </th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 1
                             </th>
-                            <td class="px-6 py-4">
+                            <td className="px-6 py-4">
                                 FPT
                             </td>
-                            <td class="px-6 py-4">
+                            <td className="px-6 py-4">
                                 200.000 VND
                             </td>
                         </tr>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 1
                             </th>
-                            <td class="px-6 py-4">
+                            <td className="px-6 py-4">
                                 FPT
                             </td>
-                            <td class="px-6 py-4">
+                            <td className="px-6 py-4">
                                 200.000 VND
                             </td>
                         </tr>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 1
                             </th>
-                            <td class="px-6 py-4">
+                            <td className="px-6 py-4">
                                 FPT
                             </td>
-                            <td class="px-6 py-4">
+                            <td className="px-6 py-4">
                                 200.000 VND
                             </td>
                         </tr>

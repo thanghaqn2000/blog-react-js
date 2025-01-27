@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Anchor = ({
@@ -35,8 +36,8 @@ const Anchor = ({
   } ${klassName}`;
 
   return (
-    <a
-      href={href}
+    <NavLink
+      to={href}
       className={finalClasses}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -50,7 +51,7 @@ const Anchor = ({
       {icon && iconPosition === "right" && (
         <FontAwesomeIcon icon={icon} className="ms-2" />
       )}
-    </a>
+    </NavLink>
   );
 };
 

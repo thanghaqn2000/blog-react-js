@@ -44,7 +44,7 @@ const Button = ({
 // Prop validation
 Button.propTypes = {
   text: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf(["primary", "secondary", "danger"]),
+  variant: PropTypes.oneOf(["primary", "secondary", "danger", "warning"]),
   size: PropTypes.oneOf(["sm", "md", "lg"]),
   icon: PropTypes.object, // FontAwesomeIcon definition
   iconPosition: PropTypes.oneOf(["left", "right"]),

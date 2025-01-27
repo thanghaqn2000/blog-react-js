@@ -1,10 +1,10 @@
 import "./ContentDetail.scss";
 import Sidebar from "../../Sidebar";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
+import DOMPurify from "dompurify";
 import { toast } from "react-toastify";
 import { loadPost } from '../../../../services/api/post-service-v1';
-import blog_post_01 from "../../../../assets/images/blog-post-02.jpg";
 import FormatDateTime from "../../../Common/FormatDateTime";
 
 function ContentDetail(props) {
@@ -43,7 +43,7 @@ function ContentDetail(props) {
                             <i className="fa fa-tags"></i>
                           </li>
                           <li>
-                            <a href="#" className="text-lg">{post.category}</a>
+                            <NavLink to="/" className="text-black text-lg">{post.category}</NavLink>
                           </li>
                         </ul>
                         <ul className="post-info flex gap-2 list-none">
@@ -57,8 +57,7 @@ function ContentDetail(props) {
                       </div>
                       <h1>{post.title}</h1>
                       <div className="main-content">
-                        <p dangerouslySetInnerHTML={{ __html: post.content }}>
-                        </p>
+                        <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}/>
                       </div>
                     </div>
                   </div>

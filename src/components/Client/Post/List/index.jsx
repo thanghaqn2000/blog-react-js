@@ -1,15 +1,12 @@
 import "./ListPost.scss";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import debounce from "lodash.debounce";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 import FormatDateTime from "../../../Common/FormatDateTime";
-import Pagination from "../../../Common/Pagination";
 import Button from "../../../Items/Button";
 import Sidebar from "../../Sidebar";
-import SearchBar from "../../SearchBar";
 import { loadAllPosts } from "../../../../services/api/post-service-v1";
 import Banner from "../../Banner";
 
@@ -58,33 +55,16 @@ function ShowListPost({post, type}) {
 
 function ListPost() {
   const [listPost, setListPost] = useState([]);
-  const [metaPagination, setMetaPagination] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchPosts = (page = 1, per_page = 3, title = "") => {
     loadAllPosts({ page: page, per_page: per_page, title: title })
       .then((posts) => {
         setListPost(posts.data);
-        setMetaPagination(posts.meta);
         window.scrollTo({ top: 0, behavior: "smooth" });
       })
       .catch((error) => {
         console.error("Error fetching posts:", error);
       });
-  };
-
-  const debouncedFetchPosts = useCallback(
-    debounce((search) => fetchPosts(1, search), 500),
-    []
-  );
-
-  const handleSearch = (search) => {
-    setSearchTerm(search);
-    debouncedFetchPosts(search);
-  };
-
-  const handlePageChange = (page) => {
-    fetchPosts(page, searchTerm);
   };
 
   useEffect(() => {

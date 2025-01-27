@@ -63,22 +63,22 @@ function HeaderUp() {
                 </NavLink>
               </li>
               <li className="nav-header-down" onClick={closeNavbar}>
-                <a className="nav-link" href="about.html">
+                <NavLink to="/admin" className="nav-link">
                   <FontAwesomeIcon icon={faAddressCard} className="pr-2" />
                   Hướng dẫn mở tài khoản
-                </a>
+                </NavLink>
               </li>
               <li className="nav-header-down" onClick={closeNavbar}>
-                <a className="nav-link" href="blog.html">
+                <NavLink className="nav-link" to="/admin">
                   <FontAwesomeIcon icon={faHandshake} className="pr-2" />
                   Cộng tác
-                </a>
+                </NavLink>
               </li>
               <li className="nav-header-down" onClick={closeNavbar}>
-                <a className="nav-link" href="post-details.html">
+                <NavLink className="nav-link" to="post-details.html">
                   <FontAwesomeIcon icon={faRightToBracket} className="pr-2" />
                   Đăng nhập
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -121,7 +121,7 @@ function HeaderBottom() {
             }}
           >
             <li className="relative">
-              <Anchor href="#"
+              <Anchor href="/admin"
                 klassName="text-white font-black"
                 text="Trang chủ"
                 variant="primary"
@@ -129,7 +129,7 @@ function HeaderBottom() {
                 />
             </li>
             <li className="relative">
-              <Anchor href="#"
+              <Anchor href="/admin"
                 klassName="text-white font-black"
                 text="Tin tức"
                 variant="primary"
@@ -161,20 +161,20 @@ function HeaderBottom() {
               >
                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200 text-white">
                   <li>
-                    <a
-                      href="/"
+                    <NavLink
+                      to="/admin"
                       className="block px-4 py-2 border-b-2 hover:bg-white hover:text-black"
                     >
                       Phân tích cơ bản - thực chiến
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a
-                      href="/"
+                    <NavLink
+                      to="/"
                       className="block px-4 py-2 hover:bg-white hover:text-black"
                     >
                       Phân tích kỹ thuật - thực chiến
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
               </div>
@@ -197,20 +197,20 @@ function HeaderBottom() {
               >
                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200 text-white">
                   <li>
-                    <a
-                      href="/"
+                    <NavLink
+                      to="/"
                       className="block px-4 py-2 border-b-2 hover:bg-white hover:text-black"
                     >
                       Câu hỏi thường gặp
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a
-                      href="/"
+                    <NavLink
+                      to="/"
                       className="block px-4 py-2 hover:bg-white hover:text-black"
                     >
                       Kinh nghiệm phân tích
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
               </div>
@@ -218,7 +218,7 @@ function HeaderBottom() {
 
             <li className="relative group">
               <Anchor
-                href="#"
+                href="/"
                 klassName="text-white font-black"
                 text="Sản phẩm"
                 variant="primary"
@@ -233,28 +233,28 @@ function HeaderBottom() {
               >
                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200 text-white">
                   <li>
-                    <a
-                      href="/"
+                    <NavLink
+                      to="/"
                       className="block px-4 py-2 border-b-2 hover:bg-white hover:text-black"
                     >
                       AI - Tín hiệu đầu tư
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a
-                      href="/"
+                    <NavLink
+                      to="/"
                       className="block px-4 py-2 hover:bg-white hover:text-black"
                     >
                       Tư vấn đầu tư
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
-                    <a
-                      href="/"
+                    <NavLink
+                      to="/"
                       className="block px-4 py-2 hover:bg-white hover:text-black"
                     >
                       Baó cáo đầu tư
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
               </div>
