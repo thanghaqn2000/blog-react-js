@@ -17,6 +17,8 @@ import {
 } from "react-router-dom";
 import ScrollToTop from "./components/Common/ScrollToTop";
 import LoginAdmin from "./components/Admin/Login";
+import LoginClient from "./components/Client/Login";
+import Register from "./components/Client/Register";
 
 function App() {
   const location = useLocation(); 
@@ -38,6 +40,8 @@ function App() {
           </Route>
           <Route path="*" element={<Navigate to="/not_found" />} />
           <Route path="/not_found" element={<NotFoundPage />} />
+          <Route path="/login" element={<LoginClient />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </div>
       <Footer></Footer>

@@ -23,7 +23,6 @@ function HeaderUp() {
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
-
   const closeNavbar = () => {
     setIsOpen(false);
   };
@@ -75,7 +74,7 @@ function HeaderUp() {
                 </NavLink>
               </li>
               <li className="nav-header-down" onClick={closeNavbar}>
-                <NavLink className="nav-link" to="post-details.html">
+                <NavLink className="nav-link" to="/login">
                   <FontAwesomeIcon icon={faRightToBracket} className="pr-2" />
                   Đăng nhập
                 </NavLink>
@@ -91,7 +90,6 @@ function HeaderBottom() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
 
   return (
     <div className="header-bot">
