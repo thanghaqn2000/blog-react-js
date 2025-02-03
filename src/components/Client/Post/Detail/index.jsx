@@ -1,10 +1,10 @@
 import "./ContentDetail.scss";
 import Sidebar from "../../Sidebar";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
+import DOMPurify from "dompurify";
 import { toast } from "react-toastify";
 import { loadPost } from '../../../../services/api/post-service-v1';
-import blog_post_01 from "../../../../assets/images/blog-post-02.jpg";
 import FormatDateTime from "../../../Common/FormatDateTime";
 
 function ContentDetail(props) {
@@ -43,10 +43,10 @@ function ContentDetail(props) {
                             <i className="fa fa-tags"></i>
                           </li>
                           <li>
-                            <a href="#" className="text-lg">{post.category}</a>
+                            <NavLink to="/" className="text-black text-lg">{post.category}</NavLink>
                           </li>
                         </ul>
-                        <ul className="post-info flex gap-2 list-none m-0 p-0">
+                        <ul className="post-info flex gap-2 list-none">
                           <li>
                             <span className="text-lg font-bold">Đức Toàn</span>
                           </li>
@@ -56,148 +56,9 @@ function ContentDetail(props) {
                         </ul>
                       </div>
                       <h1>{post.title}</h1>
-                      <p dangerouslySetInnerHTML={{ __html: post.content }}>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-12">
-                  <div className="sidebar-item comments">
-                    <div className="sidebar-heading">
-                      <h2>4 comments</h2>
-                    </div>
-                    <div className="content">
-                      <ul>
-                        <li>
-                          <div className="author-thumb">
-                            <img src={blog_post_01} alt="" />
-                          </div>
-                          <div className="right-content">
-                            <h4>
-                              Charles Kate<span>May 16, 2020</span>
-                            </h4>
-                            <p>
-                              Fusce ornare mollis eros. Duis et diam vitae justo
-                              fringilla condimentum eu quis leo. Vestibulum id
-                              turpis porttitor sapien facilisis scelerisque.
-                              Curabitur a nisl eu lacus convallis eleifend
-                              posuere id tellus.
-                            </p>
-                          </div>
-                        </li>
-                        <li className="replied">
-                          <div className="author-thumb">
-                            <img src={blog_post_01} alt="" />
-                          </div>
-                          <div className="right-content">
-                            <h4>
-                              Thirteen Man<span>May 20, 2020</span>
-                            </h4>
-                            <p>
-                              In porta urna sed venenatis sollicitudin. Praesent
-                              urna sem, pulvinar vel mattis eget.
-                            </p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="author-thumb">
-                            <img src={blog_post_01} alt="" />
-                          </div>
-                          <div className="right-content">
-                            <h4>
-                              Belisimo Mama<span>May 16, 2020</span>
-                            </h4>
-                            <p>
-                              Nullam nec pharetra nibh. Cras tortor nulla,
-                              faucibus id tincidunt in, ultrices eget ligula.
-                              Sed vitae suscipit ligula. Vestibulum id turpis
-                              volutpat, lobortis turpis ac, molestie nibh.
-                            </p>
-                          </div>
-                        </li>
-                        <li className="replied">
-                          <div className="author-thumb">
-                            <img src={blog_post_01} alt="" />
-                          </div>
-                          <div className="right-content">
-                            <h4>
-                              Thirteen Man<span>May 22, 2020</span>
-                            </h4>
-                            <p>
-                              Mauris sit amet justo vulputate, cursus massa
-                              congue, vestibulum odio. Aenean elit nunc, gravida
-                              in erat sit amet, feugiat viverra leo.
-                            </p>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-12">
-                  <div className="sidebar-item submit-comment">
-                    <div className="sidebar-heading">
-                      <h2>Your comment</h2>
-                    </div>
-                    <div className="content">
-                      <form id="comment" action="#" method="post">
-                        <div className="row">
-                          <div className="col-md-6 col-sm-12">
-                            <fieldset>
-                              <input
-                                name="name"
-                                type="text"
-                                id="name"
-                                placeholder="Your name"
-                                required=""
-                              />
-                            </fieldset>
-                          </div>
-                          <div className="col-md-6 col-sm-12">
-                            <fieldset>
-                              <input
-                                name="email"
-                                type="text"
-                                id="email"
-                                placeholder="Your email"
-                                required=""
-                              />
-                            </fieldset>
-                          </div>
-                          <div className="col-md-12 col-sm-12">
-                            <fieldset>
-                              <input
-                                name="subject"
-                                type="text"
-                                id="subject"
-                                placeholder="Subject"
-                              />
-                            </fieldset>
-                          </div>
-                          <div className="col-lg-12">
-                            <fieldset>
-                              <textarea
-                                name="message"
-                                rows="6"
-                                id="message"
-                                placeholder="Type your comment"
-                                required=""
-                              ></textarea>
-                            </fieldset>
-                          </div>
-                          <div className="col-lg-12">
-                            <fieldset>
-                              <button
-                                type="submit"
-                                id="form-submit"
-                                className="main-button"
-                              >
-                                Submit
-                              </button>
-                            </fieldset>
-                          </div>
-                        </div>
-                      </form>
+                      <div className="main-content">
+                        <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}/>
+                      </div>
                     </div>
                   </div>
                 </div>

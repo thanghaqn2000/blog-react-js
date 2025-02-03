@@ -10,6 +10,7 @@ const AdminGuard = ({ children }) => {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -21,7 +22,11 @@ const AdminGuard = ({ children }) => {
           setIsAuthenticated(true);
 
           if(isExpiredToken(accessToken) && !isExpiredToken(refreshToken)) {
-            await refreshAccessToken(refreshToken);
+            if(!isRefreshing){
+              setIsRefreshing(true);
+              await refreshAccessToken(refreshToken);
+              setIsRefreshing(false);
+            }
           } else if(isExpiredToken(refreshToken) && isExpiredToken(accessToken)) {
             navigate("/login_admin");
           }
