@@ -22,7 +22,7 @@ const Button = ({
   // Tailwind classes for sizes
   const sizes = {
     sm: "text-sm px-3 py-1.5",
-    md: "text-base px-4 py-2",
+    md: "text-base-xl px-4 py-2",
     lg: "text-lg px-6 py-3",
   };
 

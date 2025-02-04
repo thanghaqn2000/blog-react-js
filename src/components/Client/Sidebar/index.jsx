@@ -8,7 +8,7 @@ function Sidebar() {
         <div className="row">
           <div className="col-lg-12 chart-perfomance">
             <div className="sidebar-heading">
-              <h2>Hiệu suất danh mục đầu tư <br/>
+              <h2>Hiệu suất danh mục đầu tư<br/>
                 <span>(Cập nhật hàng tuần)</span>
               </h2>
             </div>
