@@ -17,19 +17,21 @@ const LoginClient = () => {
   };
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-between col-lg-12 px-8">
-      <div className="px-6 py-8 bg-white rounded-lg shadow dark:border dark:bg-gray-800
-            dark:border-gray-700 col-lg-6 ml-8" style={{height: "800px"}}>
-        <div className="login-form pl-3 pt-[100px]">
+    <section className="bg-gray-50 dark:bg-gray-900 min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 lg:px-8">
+      <div className="w-full lg:w-1/2 xl:w-2/5 px-6 py-8 bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 lg:ml-8">
+        <div className="login-form pl-3 pt-[50px] lg:pt-[100px]">
           <div className="text-center">
             <img
               className="w-8 h-8 mx-auto mb-2"
               src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
               alt="logo"
             />
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
               Chưa có tài khoản?{' '}
-              <NavLink to="/register" className="text-blue-600 underline cursor-pointer hover:shadow-lg hover:bg-blue-100 px-1 rounded-md transition-all">
+              <NavLink
+                to="/register"
+                className="text-blue-600 underline cursor-pointer hover:shadow-lg hover:bg-blue-100 px-1 rounded-md transition-all"
+              >
                 Tạo ngay ở đây
               </NavLink>
             </h1>
@@ -38,24 +40,25 @@ const LoginClient = () => {
             <div>
               <label
                 htmlFor="email"
-                className="text-base-xl block mb-2 text-sm font-medium text-gray-900 text-black"
+                className="text-base-xl block mb-2 font-large text-gray-900 dark:text-white"
               >
-                Email
+                Số điện thoại
               </label>
               <input
-                type="email"
+                type="tel"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                placeholder="email@gmail.com"
+                placeholder="0915xxxxxx"
                 required
               />
             </div>
+  
             <div>
               <label
                 htmlFor="password"
-                className="text-base-xl block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="text-base-xl block mb-2 font-large text-gray-900 dark:text-white"
               >
                 Mật khẩu
               </label>
@@ -69,6 +72,7 @@ const LoginClient = () => {
                 required
               />
             </div>
+  
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
@@ -80,7 +84,7 @@ const LoginClient = () => {
                 />
                 <label
                   htmlFor="remember"
-                  className="text-base-xl ml-2 text-sm text-black-500 dark:text-black-300 text-black"
+                  className="text-base-xl ml-2 text-medium text-black-500 dark:text-black-300"
                 >
                   Ghi nhớ đăng nhập
                 </label>
@@ -92,34 +96,37 @@ const LoginClient = () => {
                 Quên mật khẩu?
               </NavLink>
             </div>
+  
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white hover:bg-blue-700 focus:ring-4
-                        focus:outline-none focus:ring-blue-300 rounded-lg
-                        text-base-xl px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 font-bold"
+              className="w-full bg-blue-600 text-white hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-base-xl px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 font-bold"
             >
               Đăng nhập
             </button>
-            <div className="login-social flex justify-between space-x-2">
-              <button type="button" className="f text-base-xl text-white bg-[#3b5998]
-                hover:bg-[#3b5998]/90 focus:ring-4 focus:ring-[#3b5998]/50 font-bold rounded-lg
-                text-sm px-5 py-2.5 text-center flex justify-center items-center dark:focus:ring-[#3b5998]/55 w-1/2">
-                  <FontAwesomeIcon icon={faFacebookF} size="lg" className="mr-2 -ml-1 w-4 h-4"/>
+  
+            <div className="login-social flex flex-col space-y-4 lg:flex-row lg:space-y-0 lg:space-x-4">
+              <button
+                type="button"
+                className="text-base-xl text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:ring-[#3b5998]/50 font-bold rounded-lg text-sm px-5 py-2.5 text-center flex justify-center items-center dark:focus:ring-[#3b5998]/55 w-full lg:w-1/2"
+              >
+                <FontAwesomeIcon icon={faFacebookF} size="lg" className="mr-2 -ml-1 w-4 h-4" />
                 Đăng nhập với Facebook
               </button>
-
-              <button type="button" className="text-base-xl text-white bg-red-700 hover:bg-red-800 focus:ring-4
-                focus:ring-[#4285F4]/50 font-bold rounded-lg text-sm px-5 py-2.5 text-center
-                flex justify-center items-center dark:focus:ring-[#4285F4]/55 w-1/2">
-                <FontAwesomeIcon icon={faGoogle} size="lg" className="mr-2 -ml-1 w-4 h-4"/>
+  
+              <button
+                type="button"
+                className="text-base-xl text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-[#4285F4]/50 font-bold rounded-lg text-sm px-5 py-2.5 text-center flex justify-center items-center dark:focus:ring-[#4285F4]/55 w-full lg:w-1/2"
+              >
+                <FontAwesomeIcon icon={faGoogle} size="lg" className="mr-2 -ml-1 w-4 h-4" />
                 Đăng nhập với Google
               </button>
             </div>
           </form>
         </div>
       </div>
-      <div className="back-img col-lg-6 ml-5">
-        <img src={login_img} alt="" className="w-9/12" />
+  
+      <div className="w-full lg:w-1/2 hidden lg:flex justify-center items-center mt-8 lg:mt-0 lg:ml-5">
+        <img src={login_img} alt="" className="w-full lg:w-9/12" />
       </div>
     </section>
   );

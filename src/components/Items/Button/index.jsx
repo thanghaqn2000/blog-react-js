@@ -8,7 +8,8 @@ const Button = ({
   size = "md", 
   icon = null, 
   iconPosition = "left", 
-  additionalClasses = "", 
+  addClass = "",
+  disabled = false,
   onClick 
 }) => {
   // Tailwind classes for variants
@@ -26,10 +27,13 @@ const Button = ({
     lg: "text-lg px-6 py-3",
   };
 
-  const baseClasses = `inline-flex items-center font-medium rounded-lg focus:outline-none focus:ring-2 transition ${variants[variant] || variants.primary} ${sizes[size] || sizes.md} ${additionalClasses}`;
+  const baseClasses = `font-medium rounded-lg
+                       focus:outline-none focus:ring-2 transition
+                       ${variants[variant] || variants.primary} ${sizes[size] || sizes.md} ${addClass}
+                       ${disabled ? "px-4 py-2 rounded-md cursor-not-allowed opacity-70" : ""}`;
 
   return (
-    <button className={baseClasses} onClick={onClick}>
+    <button className={baseClasses} onClick={onClick} disabled={disabled}>
       {icon && iconPosition === "left" && (
         <FontAwesomeIcon icon={icon} className="mr-2" />
       )}
@@ -46,9 +50,9 @@ Button.propTypes = {
   text: PropTypes.string.isRequired,
   variant: PropTypes.oneOf(["primary", "secondary", "danger", "warning"]),
   size: PropTypes.oneOf(["sm", "md", "lg"]),
-  icon: PropTypes.object, // FontAwesomeIcon definition
+  icon: PropTypes.object,
   iconPosition: PropTypes.oneOf(["left", "right"]),
-  additionalClasses: PropTypes.string,
+  addClass: PropTypes.string,
   onClick: PropTypes.func,
 };
 

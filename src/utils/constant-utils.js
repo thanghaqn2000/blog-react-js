@@ -42,3 +42,6 @@ export const configEditor = {
   placeholder: "",
   showXPathInStatusbar: false,
 };
+
+export const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+export const phoneNumberRegex = /^(\+84|84|0)?([0-9]{9,10})$/;
