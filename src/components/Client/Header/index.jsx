@@ -273,17 +273,17 @@ function HeaderBottom() {
 }
 
 function Header() {
-  useEffect(() => {
-    const handleScrollEvent = () => {
-      handleScroll();
-    };
+  // useEffect(() => {
+  //   const handleScrollEvent = () => {
+  //     handleScroll();
+  //   };
 
-    window.addEventListener("scroll", handleScrollEvent);
+  //   window.addEventListener("scroll", handleScrollEvent);
 
-    return () => {
-      window.removeEventListener("scroll", handleScrollEvent);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScrollEvent);
+  //   };
+  // }, []);
 
   return (
     <header className="">
