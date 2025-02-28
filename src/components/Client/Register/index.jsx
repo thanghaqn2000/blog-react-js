@@ -36,10 +36,12 @@ const Register = () => {
       setLoading(true);
 
       await registerUser({
-        email: data.email,
-        phone_number: data.phoneNumber,
-        password: data.password,
-        name: data.userName
+        user: {
+          email: data.email,
+          phone_number: data.phoneNumber,
+          password: data.password,
+          name: data.userName
+        }
       });
       toast.success("Tạo tài khoản thành công, hãy đăng nhập!");
       navigate("/login");

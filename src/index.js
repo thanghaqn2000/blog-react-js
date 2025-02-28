@@ -5,14 +5,17 @@ import './index.css';
 import App from './App';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthProvider } from './context/AuthContex';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter> 
-      <App />
-      <ToastContainer position="top-right" autoClose={3000} />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter> 
+        <App />
+        <ToastContainer position="top-right" autoClose={3000} />
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>
 );
 

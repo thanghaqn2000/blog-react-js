@@ -1,31 +1,88 @@
-import "./Header.scss";
-import React, { useEffect, useState } from "react";
+import {
+  faAddressCard,
+  faBars,
+  faChevronDown,
+  faCircleInfo,
+  faGear,
+  faHandshake,
+  faRightFromBracket,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faRightToBracket, faAddressCard,
-  faHandshake, faCircleInfo, faBars } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAuth } from "../../../context/AuthContex";
 import Anchor from "../../Items/Anchor";
+import "./Header.scss";
 
-function handleScroll() {
-  const scroll = window.scrollY;
-  const header = document.querySelector("header");
-  if (header) {
-    if (scroll >= 250) {
-      header.classList.add("background-header");
-    } else {
-      header.classList.remove("background-header");
-    }
-  }
+function UserProfile({ logout }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const logoutUser = (event) => {
+    event.preventDefault();
+    logout();
+    toast.success("Đăng xuất thành công!");
+    navigate("/login");
+  };
+
+  return (
+    <div className="user-profile">
+      <div
+        className="relative inline-flex items-center justify-center w-10 aspect-square bg-blue-500 rounded-full cursor-pointer"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <FontAwesomeIcon
+          icon={faUser}
+          size="lg"
+          className="text-white"
+          onClick={() => setIsOpen(!isOpen)}
+        />
+      </div>
+      {isOpen && (
+        <ul
+          role="menu"
+          data-popover="profile-menu"
+          data-popover-placement="bottom"
+          className="absolute z-10 min-w-[180px] overflow-auto rounded-lg border border-slate-200 bg-white p-1.5 shadow-lg shadow-sm focus:outline-none"
+        >
+          <li
+            role="menuitem"
+            className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100"
+          >
+            <FontAwesomeIcon icon={faGear} />
+            <p className="text-slate-800 font-medium ml-2">Hồ sơ của tôi</p>
+          </li>
+
+          <hr className="my-2 border-slate-200" role="menuitem" />
+          <li
+            role="menuitem"
+            className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100"
+            onClick={logoutUser}
+          >
+            <FontAwesomeIcon icon={faRightFromBracket} />
+            <p className="text-slate-800 font-medium ml-2">Đăng xuất</p>
+          </li>
+        </ul>
+      )}
+    </div>
+  );
 }
 function HeaderUp() {
+  const { user, logout, isAuthChecked } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
   const closeNavbar = () => {
     setIsOpen(false);
   };
+
+  if (!isAuthChecked) {
+    return null;
+  }
+
   return (
     <div className="header-up">
       <nav className="navbar navbar-expand-lg">
@@ -73,19 +130,29 @@ function HeaderUp() {
                   Cộng tác
                 </NavLink>
               </li>
-              <li className="nav-header-down" onClick={closeNavbar}>
-                <NavLink className="nav-link" to="/login">
-                  <FontAwesomeIcon icon={faRightToBracket} className="pr-2" />
-                  Đăng nhập
-                </NavLink>
-              </li>
+              {user ? (
+                <li className="nav-header-down" onClick={closeNavbar}>
+                  <UserProfile logout={logout} className="nav-link" />
+                </li>
+              ) : (
+                <li className="nav-header-down" onClick={closeNavbar}>
+                  <NavLink className="nav-link" to="/login">
+                    <FontAwesomeIcon
+                      icon={faRightFromBracket}
+                      className="pr-2"
+                    />
+                    Đăng nhập
+                  </NavLink>
+                </li>
+              )}
             </ul>
           </div>
         </div>
       </nav>
     </div>
-  )
+  );
 }
+
 function HeaderBottom() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -95,10 +162,7 @@ function HeaderBottom() {
     <div className="header-bot">
       <nav className="navbar-expand-lg bg-[#004370]">
         <div className="flex justify-between items-center p-4 lg:hidden">
-          <button
-            className="text-white text-2xl"
-            onClick={toggleMenu}
-          >
+          <button className="text-white text-2xl" onClick={toggleMenu}>
             <FontAwesomeIcon icon={faBars} />
           </button>
         </div>
@@ -119,28 +183,31 @@ function HeaderBottom() {
             }}
           >
             <li className="relative">
-              <Anchor href="/admin"
+              <Anchor
+                href="/admin"
                 klassName="text-white font-black"
                 text="Trang chủ"
                 variant="primary"
                 size="lg"
-                />
+              />
             </li>
             <li className="relative">
-              <Anchor href="/admin"
+              <Anchor
+                href="/admin"
                 klassName="text-white font-black"
                 text="Tin tức"
                 variant="primary"
                 size="lg"
-                />
+              />
             </li>
             <li className="relative">
-              <Anchor href="#"
+              <Anchor
+                href="#"
                 klassName="text-white font-black"
                 text="Danh mục đầu tư"
                 variant="primary"
                 size="lg"
-                />
+              />
             </li>
             <li className="relative group">
               <Anchor
@@ -258,12 +325,13 @@ function HeaderBottom() {
               </div>
             </li>
             <li className="relative">
-              <Anchor href="#"
+              <Anchor
+                href="#"
                 klassName="text-white font-black"
                 text="Liên hệ"
                 variant="primary"
                 size="lg"
-                />
+              />
             </li>
           </ul>
         </div>
@@ -273,22 +341,10 @@ function HeaderBottom() {
 }
 
 function Header() {
-  // useEffect(() => {
-  //   const handleScrollEvent = () => {
-  //     handleScroll();
-  //   };
-
-  //   window.addEventListener("scroll", handleScrollEvent);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScrollEvent);
-  //   };
-  // }, []);
-
   return (
     <header className="">
-      <HeaderUp/>
-      <HeaderBottom/>
+      <HeaderUp />
+      <HeaderBottom />
     </header>
   );
 }
